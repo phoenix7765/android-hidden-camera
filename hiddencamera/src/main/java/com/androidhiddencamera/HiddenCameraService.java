@@ -107,7 +107,8 @@ public abstract class HiddenCameraService extends Service implements CameraCallb
     public void stopCamera() {
         if (mCameraPreview != null) {
             mWindowManager.removeView(mCameraPreview);
-            mCameraPreview.stopPreviewAndFreeCamera();
+            mCameraPreview.stopAndRelease();
+            mCameraPreview = null;
         }
     }
 
