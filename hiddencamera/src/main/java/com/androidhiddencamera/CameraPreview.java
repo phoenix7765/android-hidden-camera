@@ -257,4 +257,16 @@ class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
             mCamera = null;
         }
     }
+    /**
+     * Release All Handler & Surface to avoid Out Of Memory
+     */
+    void stopAndRelease() {
+        //Fix Surface memory leak
+        destroyDrawingCache();
+        stopPreviewAndFreeCamera();
+        if (mHolder != null) {
+            mHolder.removeCallback(this);
+            mHolder.getSurface().release();
+        }
+    }
 }
